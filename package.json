@@ -1,0 +1,21 @@
+{
+  "name": "sitehypnose",
+  "version": "1.0.0",
+  "description": "site web pour la communauté francophone",
+  "main": "main.js",
+  "scripts":
+  {
+    "start": "node main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neuneutrinos/siteHypnose.git"
+  },
+  "author": "mélimélo & neuneutrinos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/neuneutrinos/siteHypnose/issues"
+  },
+  "homepage": "https://github.com/neuneutrinos/siteHypnose#readme"
+}

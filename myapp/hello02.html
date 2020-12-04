@@ -4,7 +4,7 @@
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script>
 function valid() {
-    $.get('', { name: $('#name').val() }, function(data) {
+    $.get('http://localhost:1337/hello02.html', { name: $('#name').val() }, function(data) {
         $('#message').html(data.message);
     }, 'json');
 }
