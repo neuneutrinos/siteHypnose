@@ -14,4 +14,7 @@ app.get('/test/:controller/:view/:id',(req,res)=>
     res.end();
 })
 
+require('./test')
+require('./test')
+
 app.listen(8080)
