@@ -14,4 +14,9 @@ app.get('/test/:controller/:view/:id',(req,res)=>
     res.end();
 })
 
+require('./test')
+require('./test')
+
+let connexion = require('./sql/connexionMysql')
+
 app.listen(8080)
