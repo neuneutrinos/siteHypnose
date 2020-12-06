@@ -7,14 +7,14 @@
 }
 
 
-body {
+body, .breadcrumb{
   background-color: aliceblue;
 }
 
 .card  {
   position: relative;
-  left: 100%;
-  top: 20%;
+  text-align: center;
+  width: 100%;
   background-color: aliceblue;
 }
 
@@ -27,9 +27,11 @@ h1,h4 {
   text-align: center;
 }
 
-.travauxencours {
-  background-color: red;
+footer  {
+  color: blue;
+
 }
+
 
 /*Formulaire de login*/
 .form-signin {
