@@ -1,28 +1,17 @@
-var http = require('http');
-var url = require('url');
-var fs = require('fs');
+let express = require('express');
 
-let serverData =
+let app = express();
+
+app.get('/',(req,res)=>
 {
-    url:'127.0.0.1',
-    port:1337
-}
+    res.send('test : req ='+req);
+})
 
-var server = http.createServer(function (req, res) {
-    var url_parts = url.parse(req.url, true);
-    var name = url_parts.query.name;
-    if (name) {
-        console.log('Name: ' +name);
-        res.writeHead(200, {'Content-Type': 'application/json'});
-        res.end(JSON.stringify({message: 'Hello ' +name + '!'}));
-    } else {
-        console.log('No name!');
-        res.writeHead(200, {'Content-Type': 'text/html'});
-        fs.readFile('myapp/hello02.html',function (err,data) {
-            res.end(data);
-            console.log("data => ",data)
-        });
-    }
-}).listen(serverData.port,serverData.url);
+app.get('/test/:controller/:view/:id',(req,res)=>
+{
+    str = '<p>controller ='+req.params.controller+'</p><p>view ='+req.params.view+'</p><p>id ='+req.params.id+'</p>';
+    res.send(str);
+    res.end();
+})
 
-console.log('Server running at http://'+serverData.url+':'+serverData.port+'/');
+app.listen(8080)
