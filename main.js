@@ -1,5 +1,7 @@
 let express = require('express');
 
+require('./mysql/createDatabase');
+
 let app = express();
 
 app.get('/',(req,res)=>
@@ -14,9 +16,6 @@ app.get('/test/:controller/:view/:id',(req,res)=>
     res.end();
 })
 
-require('./test')
-require('./test')
 
-let connexion = require('./sql/connexionMysql')
 
 app.listen(8080)
