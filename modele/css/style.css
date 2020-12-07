@@ -17,6 +17,11 @@ body, .breadcrumb{
   width: 100%;
   background-color: aliceblue;
 }
+.card1  {
+  position: relative;
+  left: 90%;
+    background-color: aliceblue;
+  }
 
 .fa  {
   color: blue;
@@ -30,6 +35,9 @@ h1,h4 {
 footer  {
   color: blue;
 
+}
+.backtotop {
+  text-align: right;
 }
 
 
