@@ -1,5 +1,6 @@
 /* 
 Création de table et génération de requète SQL
+Ne gère pas les dépendances, juste le stockages des propriétés et la génération de code sql
 */
 
 class Field
@@ -15,15 +16,39 @@ class Field
     static createUnique(type){return new Field(type,['unique'])}
     static createUniqueNotNull(type){return new Field(type,['unique not null'])}
 
-    static primaryKey = new Field('varchar(36)',['primary key'])
+    static typeID = 'varchar(36)'
+    static primaryKey = new Field(Field.typeID,['primary key'])
+    static foreignKey = new Field(Field.typeID,[])
+    
 }
 
 module.exports.Field = Field
 
+//private ------------------------------------------
+var buildFieldQuery = (fieldname,field)=>
+{
+    var str = `\t${fieldname}\t${field.type}\t`;
+    for(var c of field.constraints)
+        str+=' '+c+' '
+    return str;
+}
+
+var buildForeignKey = (tablename,ref,tableRef)=>
+{
+    var str=''
+    if(ref == '')ref = `${tableRef}_id`
+    
+    str+=',\n'+buildFieldQuery(ref,Field.foreignKey)+','
+    str+=`constraint fk_${tablename}_${ref}_ref_${tableRef} foreign key (${ref}) references ${tableRef}(id)`
+
+    return str;
+}
+
 module.exports.Table = class Table
 {
-    constructor()
+    constructor(name=null)
     {
+        this.name=name;
         this.fields={id:Field.primaryKey}//set of fields
         this.foreignkeys = {}//set of foreign keys
     }
@@ -33,37 +58,49 @@ module.exports.Table = class Table
         this.fields[name] = field;
     }
 
-    putForeignKey(nameRef,tablename)
+    putForeignKey(table,nameRef=null,)
     {
+        let tablename = table.name;
+        if(nameRef===null)
+        {
+            nameRef = tablename+'_id'
+        }
         this.foreignkeys[nameRef] = tablename
     }
 
+
+
+
+
     //when all fields are set
-    buildCreateTableRequest(tablename)
+    buildCreateTableRequest()
     {
+        let tablename = this.name
         var query = `create table ${tablename}\n(\n`;
         //embedded function ti create part of query
-        var buildFieldQuery = (fieldname,field)=>
-        {
-            var str = `\t${fieldname}\t${field.type}\t`;
-            for(var c of field.constraints)
-                str+=' '+c+' '
-            return str;
-        }
+
         //write fields
         let nbFields = Object.keys(this.fields).length;
         let index=0
         for( var fieldname in this.fields)
         {
             index++
-            query+='\t'+buildFieldQuery(fieldname,this.fields[fieldname]);
+            query+=buildFieldQuery(fieldname,this.fields[fieldname]);
             if(index<nbFields)
             {
                 query+=',\n'
             }
+            //write foreign key
+        }
+        index=0
+        for(var ref in this.foreignkeys)
+        {
+            query+='\t'+buildForeignKey(this.name,ref,this.foreignkeys[ref])
         }
         query+='\n)'
-        //---------------
+         
+        //constraint fk_truc foreign key (nomChamps) references tablename(id)
         return query
     }
 }
+

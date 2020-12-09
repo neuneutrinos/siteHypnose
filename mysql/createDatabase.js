@@ -34,28 +34,15 @@ connection.changeUser({database : databaseName}, function(err)
 console.log('creation des tables')
 
 let allTable = require('./allTable');
-const table = require('./table/user')
-
-//console.log("create query =>\n ",allTable['test'].buildCreateTableRequest('test'))
-
-for(let tablename in allTable)
+//transction ?
+for(let table of allTable)
 {
-    connection.query(allTable[tablename].buildCreateTableRequest(tablename),(err)=>
+    let query = table.buildCreateTableRequest();
+    connection.query(query,(err,result)=>
     {
-        if(err===null)return;
-        console.error('erreur création table',err)
-        throw err
+        let t = table;
+        if(err!==null)throw err;
+        console.log(`table ${t.name} created`)
+
     })
-    console.log(allTable[tablename].buildCreateTableRequest(tablename))
 }
-
-connection.beginTransaction((err)=>
-{
-    if(err)
-    {
-        console.log('erreur transaction create tables')
-        throw err;
-    }
-})
-
-console.log('fin creation table')
