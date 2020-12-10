@@ -1,13 +1,13 @@
 let fs = require('fs');
 const table = require('./table/test');
 
-/* 
+/*
 class d'arbre de dépendance
 */
 var allTable={};
 
 //chargement de toutes les tables
-fs.readdirSync('./mysql/table').forEach(file => 
+fs.readdirSync('./mysql/table').forEach(file =>
 {
     let table = require('./table/'+file)
     let name=table.name===null?file.split('.')[0]:table.name
@@ -23,6 +23,7 @@ var generateOrderSQL = function()
 {
  reqAddTable = (table)=>
  {
+   console.log('table',table)
     for(dep in table.foreignkeys)
     {
         if(table.foreignkeys[dep] != table.name)

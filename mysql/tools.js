@@ -1,6 +1,6 @@
 let uuid =require('uuid')
 
-/* 
+/*
 Création de table et génération de requète SQL
 Ne gère pas les dépendances, juste le stockages des propriétés et la génération de code sql
 */
@@ -17,7 +17,7 @@ class Field
     static createNotNull(type){return new Field(type,['not null'])}
     static createUnique(type){return new Field(type,['unique'])}
     static createUniqueNotNull(type){return new Field(type,['unique not null'])}
-    
+
     static TypeSQL =
     {
         typeID : 'varchar(36)',
@@ -26,10 +26,10 @@ class Field
         smallString : 'varchar(32)',
         bigString : 'nvarchar',
     }
-    
+
     static primaryKey = new Field(Field.TypeSQL.typeID,['primary key'])
     static foreignKey = new Field(Field.TypeSQL.typeID,[])
-    
+
 }
 
 module.exports.Field = Field
@@ -107,7 +107,7 @@ module.exports.Table = class Table
             query+='\t'+buildForeignKey(this.name,ref,this.foreignkeys[ref])
         }
         query+='\n)'
-         
+
         //constraint fk_truc foreign key (nomChamps) references tablename(id)
         return query
     }
@@ -141,4 +141,3 @@ module.exports.Crud = class Crud //create, read, update , delete
     }
 
 }
-

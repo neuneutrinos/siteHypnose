@@ -46,3 +46,14 @@ for(let table of allTable)
 
     })
 }
+connection.query ('show tables', (err,rep)=>{
+    if(err)
+    {
+
+        console.log("erreur show table")
+        throw err;
+
+    }
+    console.log(rep)
+
+})
