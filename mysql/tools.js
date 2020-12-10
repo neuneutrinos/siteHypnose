@@ -1,5 +1,7 @@
-let uuid =require('uuid')
+let uuid =require('uuid');
+const connection = require('./mysqlConnection');
 
+let arrayTools = require('../tools/array/tools')
 /* 
 Création de table et génération de requète SQL
 Ne gère pas les dépendances, juste le stockages des propriétés et la génération de code sql
@@ -113,7 +115,7 @@ module.exports.Table = class Table
     }
 }
 
-module.exports.Crud = class Crud //create, read, update , delete
+class CrudBase //create, read, update , delete
 {
 
     constructor(table,connection)
@@ -123,22 +125,44 @@ module.exports.Crud = class Crud //create, read, update , delete
     }
 
     //select * from <table> where <predicate>
-    readAll(predicate=null)
+    readAllQuery(where=null)
     {
         let query = `select * from ${this.tableData.name}`;
-        if(predicate)query+=` where ${predicate}`
-
+        if(predicate)query+=` where ${where}`
+        return query;
     }
 
-    createOrUpdate(elem)
+    readByIdQuery()
+    {
+        return this.readAllQuery('id = ?')
+    }
+    /*
+        INSERT INTO table (a, b, c, date_insert)
+        VALUES (1, 20, 1, NOW())
+        ON DUPLICATE KEY UPDATE date_update=NOW
+        WHERE c=1
+    */
+    createOrUpdateQuery(elem,where)
     {
         if(!(elem.id || elem.id === uuid.NIL))//update
         {
             elem.id = uuid.v4()
         }
-        //insert v
-
+        //map elem 
+        let lstValue = Object.values(elem).map((v,i)=>
+        {
+            return (v!==null && typeof v !== 'number')? "'"+v+"'" : v
+        })
+        let lstKey = [...Object.keys(this.tableData.fields),...Object.keys(this.tableData.foreignkeys)]
+        let query = `replace into table (${arrayTools.formatArrayToParameterString(lstKey)}) values (${arrayTools.formatArrayToParameterString(lstValue)})`
+        console.log('query =>',query)
     }
 
 }
+
+
+
+module.exports.CrudBase = CrudBase
+
+
 
