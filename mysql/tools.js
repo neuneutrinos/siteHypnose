@@ -1,3 +1,5 @@
+let uuid =require('uuid')
+
 /* 
 Création de table et génération de requète SQL
 Ne gère pas les dépendances, juste le stockages des propriétés et la génération de code sql
@@ -15,10 +17,18 @@ class Field
     static createNotNull(type){return new Field(type,['not null'])}
     static createUnique(type){return new Field(type,['unique'])}
     static createUniqueNotNull(type){return new Field(type,['unique not null'])}
-
-    static typeID = 'varchar(36)'
-    static primaryKey = new Field(Field.typeID,['primary key'])
-    static foreignKey = new Field(Field.typeID,[])
+    
+    static TypeSQL =
+    {
+        typeID : 'varchar(36)',
+        entier : 'int',
+        Date : 'datetime',
+        smallString : 'varchar(32)',
+        bigString : 'nvarchar',
+    }
+    
+    static primaryKey = new Field(Field.TypeSQL.typeID,['primary key'])
+    static foreignKey = new Field(Field.TypeSQL.typeID,[])
     
 }
 
@@ -37,7 +47,6 @@ var buildForeignKey = (tablename,ref,tableRef)=>
 {
     var str=''
     if(ref == '')ref = `${tableRef}_id`
-    
     str+=',\n'+buildFieldQuery(ref,Field.foreignKey)+','
     str+=`constraint fk_${tablename}_${ref}_ref_${tableRef} foreign key (${ref}) references ${tableRef}(id)`
 
@@ -102,5 +111,34 @@ module.exports.Table = class Table
         //constraint fk_truc foreign key (nomChamps) references tablename(id)
         return query
     }
+}
+
+module.exports.Crud = class Crud //create, read, update , delete
+{
+
+    constructor(table,connection)
+    {
+        this.tableData = table;
+        this.connection = connection
+    }
+
+    //select * from <table> where <predicate>
+    readAll(predicate=null)
+    {
+        let query = `select * from ${this.tableData.name}`;
+        if(predicate)query+=` where ${predicate}`
+
+    }
+
+    createOrUpdate(elem)
+    {
+        if(!(elem.id || elem.id === uuid.NIL))//update
+        {
+            elem.id = uuid.v4()
+        }
+        //insert v
+
+    }
+
 }
 

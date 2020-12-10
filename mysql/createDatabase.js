@@ -2,7 +2,7 @@ let connection = require('./mysqlConnection')
 
 let databaseName = 'hypnose'
 
-console.log('purge de la database')
+//console.log('purge de la database')
 
 connection.query('drop database if exists '+databaseName,(err)=>
 {
@@ -13,7 +13,7 @@ connection.query('drop database if exists '+databaseName,(err)=>
     }
 })
 
-console.log('creation de la database')
+//console.log('creation de la database')
 
 connection.query('create database '+databaseName,(err)=>
 {
@@ -31,7 +31,7 @@ connection.changeUser({database : databaseName}, function(err)
     throw err;
 });
 
-console.log('creation des tables')
+//console.log('creation des tables')
 
 let allTable = require('./allTable');
 //transction ?
