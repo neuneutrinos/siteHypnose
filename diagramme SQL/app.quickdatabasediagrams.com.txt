@@ -1,0 +1,59 @@
+
+
+#start
+
+
+utilisateur
+-
+ID PK uuid
+pseudo varchar(32)
+password varchar(32)
+mail varchar(64)
+date_creation datetime
+etat_compte enum
+metier varchar(32)
+
+permission
+-
+ID PK uuid
+user_ID uuid FK >- utilisateur.ID
+flag binary
+
+message
+-
+ID uuid PK
+auteur uuid FK >- utilisateur.ID # -> contributeurs
+date_creation datetime
+titre string
+ref_article string
+
+tag_article
+-
+ID uuid PK
+message uuid FK >- message.ID
+tag_id uuid FK >- tag.ID
+
+tag
+-
+ID uuid PK
+libelle string
+
+source
+-
+ID uuid PK
+titre string
+auteur string
+date datetime
+description string
+ref_source string
+etat int
+type enum
+
+message_source
+-
+ID uuid PK
+message uuid FK >- message.ID
+source_ID uuid FK >- source.ID
+
+
+
