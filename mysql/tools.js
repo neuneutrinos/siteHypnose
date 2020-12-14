@@ -154,7 +154,7 @@ class CrudBase //create, read, update , delete
             return (v!==null && typeof v !== 'number')? "'"+v+"'" : v
         })
         let lstKey = [...Object.keys(this.tableData.fields),...Object.keys(this.tableData.foreignkeys)]
-        let query = `replace into table (${arrayTools.formatArrayToParameterString(lstKey)}) values (${arrayTools.formatArrayToParameterString(lstValue)})`
+        let query = `replace into ${this.tableData.name} (${arrayTools.formatArrayToParameterString(lstKey)}) values (${arrayTools.formatArrayToParameterString(lstValue)})`
         console.log('query =>',query)
     }
 
