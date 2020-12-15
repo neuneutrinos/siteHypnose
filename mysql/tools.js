@@ -115,7 +115,7 @@ module.exports.Table = class Table
     }
 }
 
-class CrudBase //create, read, update , delete
+class CrudBaseQuery //create, read, update , delete
 {
 
     constructor(table,connection)
@@ -159,4 +159,6 @@ class CrudBase //create, read, update , delete
     }
 
 }
+
+module.exports.CrudBaseQuery = CrudBaseQuery
 

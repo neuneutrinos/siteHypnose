@@ -51,5 +51,5 @@ for(let table of allTable)
 let tools = require('./tools')
 tabletest = require('./table/test')
 
-crud = new tools.CrudBase(require('./table/test'),connection)
+crud = new tools.CrudBaseQuery(require('./table/test'),connection)
 crud.createOrUpdateQuery({id:'AFGC-ZBFEI-OEFBOE-EBFE',plop:'ploplop',parent_id:null,user_id:null})
