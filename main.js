@@ -1,5 +1,5 @@
 let express = require('express');
-
+require('./test')
 require('./mysql/createDatabase');
 
 let app = express();

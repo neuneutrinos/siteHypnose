@@ -46,14 +46,10 @@ for(let table of allTable)
 
     })
 }
-connection.query ('show tables', (err,rep)=>{
-    if(err)
-    {
 
-        console.log("erreur show table")
-        throw err;
+//tst
+let tools = require('./tools')
+tabletest = require('./table/test')
 
-    }
-    console.log(rep)
-
-})
+crud = new tools.CrudBaseQuery(require('./table/test'),connection)
+crud.createOrUpdateQuery({id:'AFGC-ZBFEI-OEFBOE-EBFE',plop:'ploplop',parent_id:null,user_id:null})
