@@ -23,7 +23,6 @@ var generateOrderSQL = function()
 {
  reqAddTable = (table)=>
  {
-   console.log('table',table)
     for(dep in table.foreignkeys)
     {
         if(table.foreignkeys[dep] != table.name)

@@ -1,6 +1,8 @@
 let express = require('express');
 require('./test')
-require('./mysql/createDatabase');
+let createDatabase = require('./mysql/createDatabase');
+
+createDatabase.recreateDatabase('hypnose')
 
 let app = express();
 

@@ -12,6 +12,12 @@ connectionData =
 
 var connection = mysql.createConnection(connectionData);
 
-connection.connect();
+connection.connect(err=>
+{
+    if(err)throw err
+    console.log('connected as id ' + connection.threadId);
+});
+
+connection.dto={}
 
 module.exports = connection;
