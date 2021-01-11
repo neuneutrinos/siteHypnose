@@ -1,3 +1,7 @@
+/* 
+Faire les tests
+*/
+
 tools = require('./tools/array/tools')
 
 let tab = {x:'aa',y:'ab',z:'ac','?':'da'}
