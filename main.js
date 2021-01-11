@@ -10,7 +10,9 @@ app.set('view engine', 'ejs');
 
 app.get('/reset',(req,res)=>
 {
-    createDatabase.recreateDatabase('hypnose') 
+    createDatabase.recreateDatabase('hypnose')
+    res.send('reset');
+    res.end()
 })
 
 
