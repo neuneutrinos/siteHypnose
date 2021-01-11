@@ -23,6 +23,8 @@
 
 .jumbotron {
   background-color: DeepSkyBLue;
+  padding-top: 2%;
+  padding-bottom: 2%;
 }
 
 
@@ -39,7 +41,8 @@ body, .breadcrumb{
 .card1  {
   position: relative;
   left: 90%;
-    background-color: aliceblue;
+  background-color: aliceblue;
+  width: 18rem;
   }
 
 .fa  {
