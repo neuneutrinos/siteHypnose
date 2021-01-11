@@ -2,9 +2,16 @@ let express = require('express');
 require('./test')
 let createDatabase = require('./mysql/createDatabase');
 
-createDatabase.recreateDatabase('hypnose')
+//fonction qui remet à 0 la base de donnée, à commenter si besoin pour éviter de recréer à chaque sauvegarde
+//createDatabase.recreateDatabase('hypnose')
 
 let app = express();
+
+app.get('/reset',(req,res)=>
+{
+    createDatabase.recreateDatabase('hypnose') 
+})
+
 
 app.get('/',(req,res)=>
 {
