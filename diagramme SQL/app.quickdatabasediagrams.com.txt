@@ -3,7 +3,7 @@
 #start
 
 
-utilisateur
+utilisateur fait
 -
 ID PK uuid
 pseudo varchar(32)
@@ -13,32 +13,32 @@ date_creation datetime
 etat_compte enum
 metier varchar(32)
 
-permission
+permission fait
 -
 ID PK uuid
 user_ID uuid FK >- utilisateur.ID
 flag binary
 
-message
+message. fait
 -
 ID uuid PK
-auteur uuid FK >- utilisateur.ID # -> contributeurs
+auteur quid FK >- utilisateur.ID # -> contributeurs
 date_creation datetime
 titre string
 ref_article string
 
 tag_article
 -
-ID uuid PK
+ID uuid PK Fait
 message uuid FK >- message.ID
 tag_id uuid FK >- tag.ID
 
-tag
+tag fait
 -
 ID uuid PK
 libelle string
 
-source
+source Fait
 -
 ID uuid PK
 titre string
