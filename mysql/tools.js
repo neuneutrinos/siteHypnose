@@ -118,10 +118,9 @@ module.exports.Table = class Table
 class CrudBaseQuery //create, read, update , delete
 {
 
-    constructor(table,connection)
+    constructor(table)
     {
         this.tableData = table;
-        this.connection = connection
     }
 
     //select * from <table> where <predicate>
@@ -136,13 +135,8 @@ class CrudBaseQuery //create, read, update , delete
     {
         return this.readAllQuery('id = ?')
     }
-    /*
-        INSERT INTO table (a, b, c, date_insert)
-        VALUES (1, 20, 1, NOW())
-        ON DUPLICATE KEY UPDATE date_update=NOW
-        WHERE c=1
-    */
-    createOrUpdateQuery(elem,where)
+
+    createOrUpdateQuery(elem)
     {
         if(!(elem.id || elem.id === uuid.NIL))//update
         {
@@ -155,7 +149,7 @@ class CrudBaseQuery //create, read, update , delete
         })
         let lstKey = [...Object.keys(this.tableData.fields),...Object.keys(this.tableData.foreignkeys)]
         let query = `replace into ${this.tableData.name} (${arrayTools.formatArrayToParameterString(lstKey)}) values (${arrayTools.formatArrayToParameterString(lstValue)})`
-        console.log('query =>',query)
+        return query
     }
 
 }
