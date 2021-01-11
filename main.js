@@ -6,6 +6,7 @@ let createDatabase = require('./mysql/createDatabase');
 //createDatabase.recreateDatabase('hypnose')
 
 let app = express();
+app.set('view engine', 'ejs');
 
 app.get('/reset',(req,res)=>
 {
