@@ -1,7 +1,5 @@
 let tableTools = require('../tools')
 
-
-
 let table = new tableTools.Table('message');
 table.putForeignKey(require('./utilisateur'))
 table.putField('date_creation',tableTools.Field.create(tableTools.Field.TypeSQL.Date))
