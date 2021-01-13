@@ -14,6 +14,8 @@ app.set('views', path.join(__dirname, '/front/vue'));
 app.get('/reset',(req,res)=>
 {
     createDatabase.recreateDatabase('hypnose')
+    res.send('reset')
+    res.end()
 })
 
 
