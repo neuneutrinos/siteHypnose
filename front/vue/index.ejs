@@ -5,36 +5,18 @@
 
 
 <body>
-<!--Menu-->
-<%- include('../components/menu'); %>
 
-<!--Fin Menu-->
 <!--Jumbotron-->
 <%- include('../components/jumbotron'); %>
 <!--Fin du jumbotron-->
-<!--Fil d'Ariane-->
-<%- include('../components/breadcrumb'); %>
-<!--Fin Fil d'Ariane-->
-<!--Caroussel de news dans une grid-->
-<%- include('../components/carouselnews'); %>
-<!--FinCaroussel de news dans une grid-->
-<!--Test du markdown editor-->
-<form  action="index.html" method="post">
-  <textarea name="markdown" rows="8" cols="80"></textarea>
-</form>
+
+<!--Menu-->
+<%- include('../components/menu'); %>
 
 
-<!--Partie mes travaux en cours-->
-  <h1>Mes travaux en cours</h1>
-  <section class="travauxencours">
-  <%- include('../components/travauxencours'); %>
-</section>
-<section class="backtotop">
-  <p><a href="#">Remonter en haut</a></p>
-</section>
 
 
-<!--Fin Partie mes travaux en cours-->
+
 <!--Footer-->
 
 <%- include('../components/footer'); %>
