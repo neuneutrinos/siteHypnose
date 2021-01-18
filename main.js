@@ -21,7 +21,7 @@ app.get('/reset',(req,res)=>
 
 app.get('/',(req,res)=>
 {
-  res.render('index', {titre : 'BAHD'});
+  res.render('signin', {titre : 'BAHD'});
 })
 
 
