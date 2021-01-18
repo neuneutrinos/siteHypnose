@@ -1,22 +1,24 @@
-<form>
+<form class="form-signin" action="auth" method="POST">
     <div class="form-group col-md-6">
-      <input type="text" class="form-control" placeholder="Nom"><br>
-        <input type="text" class="form-control" placeholder="Prenom"><br>
-        <input type="email" class="form-control" id="inputEmail4" placeholder="Email"><br>
-        <input type="password" class="form-control" id="inputPassword4" placeholder="Mot de passe"><br>
+      <input type="text" class="form-control" id="username" placeholder="Nom*" required><br>
+        <input type="text" class="form-control" id="inputSurname" placeholder="Prenom"><br>
+        <input type="email" class="form-control" id="inputEmail" placeholder="Email" ><br>
+        <input type="password" class="form-control" id="password" placeholder="Mot de passe*" required><br>
     </div>
     <div class="form-group">
       <label for="exampleFormControlSelect1">Métier en lien avec l'hypnose</label>
-      <select class="form-control" id="exampleFormControlSelect1">
+      <select class="form-control" id="MetierHypnose">
         <option>Hypnotiseur de spectacle</option>
         <option>Praticien en hypnose</option>
         <option>Profession médicale hypnotiseur</option>
         <option>Auxilliaire médicaux hypnotiseur</option>
         <option>Autre thérapie avec hypnose</option>
+        <option>Pas concerné</option>
+
       </select>
     </div>
       <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <input type="checkbox" class="form-check-input" id="CheckRPGD">
         <label class="form-check-label" for="exampleCheck1">En vous enregistrant, vous acceptez la politique de confidentialité que vous pouvez retrouver ici.(lien)</label>
       </div>
   <button type="submit" class="btn btn-primary">S'enregistrer</button>
