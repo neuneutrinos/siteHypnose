@@ -44,4 +44,5 @@ generateOrderSQL();
 
 
 
-module.exports = tables
+module.exports.orderedTables = tables
+module.exports.allTables = allTable
