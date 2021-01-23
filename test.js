@@ -2,8 +2,6 @@
 Faire les tests
 */
 
-tools = require('./tools/array/tools')
+dto = require('./mysql/DTO/dto.js')
 
-let tab = {x:'aa',y:'ab',z:'ac','?':'da'}
-
-console.log('TOOLS =>',tools.formatObjectToParameterString(tab) )
+console.log(dto)

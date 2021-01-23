@@ -1,5 +1,7 @@
+const connection = require('../mysqlConnection')
+
 tools = require('../tools')
-connection = require('../mysqlConnection')
+
 //basic action to database
 
 class DTO
@@ -9,17 +11,20 @@ class DTO
      this.crud = new tools.CrudBaseQuery(table)
     }
     
-    insert(elem)
+    insert(elem,callback)
     {
-        connection.query(this.crud.createOrUpdateQuery(elem),err=>
-        {
-            if(err)throw err
-        })
+        connection.query(this.crud.createOrUpdateQuery(elem),callback)
     }
 
-    update(elem)
+    update(elem,callback)
     {
-        this.insert(elem)
+        this.insert(elem,callback)
+    }
+
+    deleteById(id,callback)
+    {
+        let query = this.crud.deleteById()
+        connection.query(query,id,callback)
     }
 
 }
