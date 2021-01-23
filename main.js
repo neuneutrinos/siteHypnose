@@ -2,6 +2,9 @@ let express = require('express');
 require('./test')
 let createDatabase = require('./mysql/createDatabase');
 var path = require('path');
+const { CrudBaseQuery } = require('./mysql/tools');
+const tables = require('./mysql/allTable');
+const connection = require('./mysql/mysqlConnection');
 
 //fonction qui remet à 0 la base de donnée, à commenter si besoin pour éviter de recréer à chaque sauvegarde
 //createDatabase.recreateDatabase('hypnose')
@@ -25,10 +28,22 @@ app.get('/',(req,res)=>
 })
 
 
-app.get('/test/:controller/:view/:id',(req,res)=>
+app.get('/test/table/select/:tableName/:id?',(req,res)=>
 {
-    str = '<p>controller ='+req.params.controller+'</p><p>view ='+req.params.view+'</p><p>id ='+req.params.id+'</p>';
-    res.send(str);
-    res.end();
+  let table = tables.allTables[req.params.tableName];
+  let crud = new CrudBaseQuery(table)
+
+  connection.query(crud.readByIdQuery(),(error,result)=>
+  {
+    result= JSON.stringify(result)
+    
+    let str = '<div>'+error+'</div>'
+    str+='<div style="color:red">'+result+'</div>'
+    res.send(str)
+  })
+  
+
 })
+
+
 app.listen(8080)
