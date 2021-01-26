@@ -1,13 +1,13 @@
-<form class="form-signin" action="auth" method="POST">
+<form class="form-signin" action="/signin" method="POST">
     <div class="form-group col-md-6">
-      <input type="text" class="form-control" id="username" placeholder="Nom*" required><br>
-        <input type="text" class="form-control" id="inputSurname" placeholder="Prenom"><br>
-        <input type="email" class="form-control" id="inputEmail" placeholder="Email" ><br>
-        <input type="password" class="form-control" id="password" placeholder="Mot de passe*" required><br>
+      <input type="text" class="form-control" name="username" placeholder="Nom*" required><br>
+        <input type="text" class="form-control" name="surname" placeholder="Prenom"><br>
+        <input type="email" class="form-control" name="email" placeholder="Email" ><br>
+        <input type="password" class="form-control" name="password" placeholder="Mot de passe*" required><br>
     </div>
     <div class="form-group">
-      <label for="exampleFormControlSelect1">Métier en lien avec l'hypnose</label>
-      <select class="form-control" id="MetierHypnose">
+      <label for="metier-hypnose">Métier en lien avec l'hypnose</label>
+      <select class="form-control" id="metier-hypnose">
         <option>Hypnotiseur de spectacle</option>
         <option>Praticien en hypnose</option>
         <option>Profession médicale hypnotiseur</option>
