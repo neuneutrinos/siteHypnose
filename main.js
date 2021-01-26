@@ -3,6 +3,9 @@ var bodyParser = require('body-parser')
 require('./test')
 let createDatabase = require('./mysql/createDatabase');
 var path = require('path');
+// Standard FIPS 202 SHA-3 implementation
+const { SHA3 } = require('sha3');
+const hash = new SHA3(512);
 const { CrudBaseQuery } = require('./mysql/tools');
 const tables = require('./mysql/allTable');
 const connection = require('./mysql/mysqlConnection');
@@ -34,8 +37,9 @@ app.all('/signin',
   (req, res)=> {
     var username = req.body.username;
     var password = req.body.password;
+    var passwordcrypte = hash.update(username).update('YFTUFTYFyuf').update(password);
     res.end()
-    console.log("post received:", username, password);
+    console.log("post received:", passwordcrypte);
 });
 
 
