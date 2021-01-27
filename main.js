@@ -28,20 +28,42 @@ app.get('/',(req,res)=>
 })
 
 
-app.get('/test/table/select/:tableName/:id?',(req,res)=>
+app.all('/test/table/:action/:tableName/:id?',(req,res)=>
 {
+  let model = {}
   let table = tables.allTables[req.params.tableName];
   let crud = new CrudBaseQuery(table)
+  model.table = tables.allTables[req.params.tableName];
 
-  connection.query(crud.readByIdQuery(),(error,result)=>
+  connection.query(crud.readAllQuery(),(err,resultat)=>
   {
-    result= JSON.stringify(result)
-    
-    let str = '<div>'+error+'</div>'
-    str+='<div style="color:red">'+result+'</div>'
-    res.send(str)
+    if(err)
+    {
+      model.error = error
+    }
+    else
+    {
+      model.datas=resultat
+    }
+      console.log('model.data =',model.datas)
+      res.render('test/test_database.ejs',model)
   })
-  
+
+/*
+  let query=undefined
+  switch(req.params.action)
+  {
+    case 'create':
+      query=crud.createOrUpdateQuery()
+      break;
+    case 'read':
+      break;
+    case 'update':
+      break;
+    case 'delete':
+      break;
+  }
+  */
 
 })
 
