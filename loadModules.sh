@@ -1,5 +1,5 @@
 #!/bin/sh
-modules=(ejs nodemon express express-session mysql uuid sha3)
+modules=(ejs nodemon express express-session mysql uuid sha3 websocket socket.io)
 
 for module in "${modules[@]}"
 do
