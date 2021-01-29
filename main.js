@@ -35,11 +35,25 @@ app.get('/',(req,res)=>
 
 app.all('/signin',
   (req, res)=> {
-    var username = req.body.username;
+    var pseudo = req.body.username;
     var password = req.body.password;
-    var passwordcrypte = hash.update(username).update('YFTUFTYFyuf').update(password);
     res.end()
-    console.log("post received:", passwordcrypte);
+    var sql="SELECT * FROM utilisateur WHERE pseudo= ? and password = ?";
+    connection.query (sql, [pseudo, password],(err, res)=>
+      {
+        if (err) throw err
+         console.log(res);
+      }
+  )
+    /*let compare = (username, username) => {
+      if (username === body.username ) {
+        console.log("L'username entré et l'username en bdd sont identiques")
+      } else {
+        console.log("L'username entré et l'username en bdd ne correspondent pas")
+
+      }
+    }*/
+
 });
 
 
