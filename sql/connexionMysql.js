@@ -9,6 +9,7 @@ let connexionData =
     host:'localhost',
     user:'root',
     password:'root',
+    database:'hypnose'
 };
 
 

@@ -18,6 +18,4 @@ connection.connect(err=>
     console.log('connected as id ' + connection.threadId);
 });
 
-connection.dto={}
-
 module.exports = connection;
