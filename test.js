@@ -2,6 +2,6 @@
 Faire les tests
 */
 
-dto = require('./mysql/DTO/dto.js')
+src = require('./Constante/Path')
 
-console.log(dto)
+console.log('test => ',src)

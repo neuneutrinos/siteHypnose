@@ -48,23 +48,12 @@ app.all('/test/table/:action/:tableName/:id?',(req,res)=>
       console.log('model.data =',model.datas)
       res.render('test/test_database.ejs',model)
   })
+})
 
-/*
-  let query=undefined
-  switch(req.params.action)
-  {
-    case 'create':
-      query=crud.createOrUpdateQuery()
-      break;
-    case 'read':
-      break;
-    case 'update':
-      break;
-    case 'delete':
-      break;
-  }
-  */
-
+app.get('/css/:file',(req,res)=>
+{
+  console.log(__dirname);
+  res.sendFile(`${__dirname}/modele/css/${req.params.file}`)
 })
 
 
