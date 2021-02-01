@@ -18,6 +18,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/front/vue'));
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded())
+const http = require('http').Server(app);
 
 
 app.get('/reset',(req,res)=>
@@ -32,8 +33,7 @@ app.get('/',(req,res)=>
 {
   res.render('signin');
 })
-
-app.all('/signin',
+/*app.all('/signin',
   (req, res)=> {
     var pseudo = req.body.username;
     var password = req.body.password;
@@ -52,9 +52,9 @@ app.all('/signin',
         console.log("L'username entré et l'username en bdd ne correspondent pas")
 
       }
-    }*/
+    }
 
-});
+});*/
 
 
 
@@ -76,4 +76,7 @@ app.get('/test/table/select/:tableName/:id?',(req,res)=>
 })
 
 
-app.listen(8080)
+//app.listen(8080)
+http.listen(8080, () => {
+  console.log('listening on *:8080');
+});
