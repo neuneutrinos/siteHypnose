@@ -1,4 +1,3 @@
-let express = require('express');
 require('./test')
 let createDatabase = require('./mysql/createDatabase');
 var path = require('path');
@@ -9,23 +8,15 @@ const connection = require('./mysql/mysqlConnection');
 //fonction qui remet à 0 la base de donnée, à commenter si besoin pour éviter de recréer à chaque sauvegarde
 //createDatabase.recreateDatabase('hypnose')
 
-let app = express();
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, '/front/vue'));
+let app = require('./application/app')
+
+require('./Route/Ressource/cssRoute')
+require('./Route/Ressource/imageRoute')
+require('./Route/Ressource/jsRoute')
 
 
-app.get('/reset',(req,res)=>
-{
-    createDatabase.recreateDatabase('hypnose')
-    res.send('reset')
-    res.end()
-})
 
 
-app.get('/',(req,res)=>
-{
-  res.render('index', {titre : 'BAHD'});
-})
 
 
 app.all('/test/table/:action/:tableName/:id?',(req,res)=>
@@ -50,11 +41,6 @@ app.all('/test/table/:action/:tableName/:id?',(req,res)=>
   })
 })
 
-app.get('/css/:file',(req,res)=>
-{
-  console.log(__dirname);
-  res.sendFile(`${__dirname}/modele/css/${req.params.file}`)
-})
 
 
 app.listen(8080)
