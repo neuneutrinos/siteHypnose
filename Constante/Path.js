@@ -1,20 +1,17 @@
 
-const RESSOURCE_PATH = `${__dirname.substring(0,__dirname.lastIndexOf('\\'))}/modele/`
+const path = require('path')
 
-const CSS_PATH = RESSOURCE_PATH+"css/"
-const IMAGE_PATH = RESSOURCE_PATH+"img/"
-const JS_PATH = RESSOURCE_PATH+"js/"
+const ROOT_PATH = path.resolve(__dirname,'..')
+const RESSOURCE_PATH = path.join(ROOT_PATH,'modele')
 
-class Path
-{
-    static src_path = RESSOURCE_PATH
-}
 var exp =
 {
-    src_path : RESSOURCE_PATH,
-    img_path : IMAGE_PATH,
-    js_path  : JS_PATH,
- }
-module.exports = Path
+    ROOT_PATH:ROOT_PATH,
+    RESSOURCE_PATH:RESSOURCE_PATH,
+    RESSOURCE_PATH_CSS:path.join(RESSOURCE_PATH,'css'),
+    RESSOURCE_PATH_JS:path.join(RESSOURCE_PATH,'js'),
+    RESSOURCE_PATH_IMG:path.join(RESSOURCE_PATH,'img'),
+}
+module.exports = exp
 
 console.log('Path.js=>',exp)
