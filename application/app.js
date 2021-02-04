@@ -1,9 +1,10 @@
 //retourne l'application web
-console.log('initialisation de l\'application express')
+const path = require('path')
 
 let express = require('express');
 const ConstantePath = require('../Constante/Path')
-const path = require('path')
+
+let createDatabase = require(path.join(ConstantePath.ROOT_PATH,'mysql/createDatabase'));
 
 var app = express();
 app.set('view engine', 'ejs');
@@ -18,6 +19,11 @@ app.get('/reset',(req,res)=>
     res.end()
 })
 
+app.get('/',(req,res)=>
+{
+    res.send('ok')
+    res.end()
+})
 
 
 module.exports = app
