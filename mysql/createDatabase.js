@@ -19,7 +19,6 @@ function clearDatabase(databaseName)
     })
     
     //console.log('creation de la database')
-    
     connection.query('create database '+databaseName,(err)=>
     {
         if(err)
@@ -29,17 +28,25 @@ function clearDatabase(databaseName)
         }
     })
 
+    setDatabase(databaseName)
+}
+
+function setDatabase(databaseName)
+{
     connection.changeUser({database : databaseName}, function(err)
     {
-        if(err===null)return;
-        console.log('erreur changement de database',err)
-        throw err;
+        if(err)
+        {
+            console.log('erreur changement de database',err)
+            throw err;
+        }
+        console.log(`new database :\x1b[35m${databaseName}\x1b[0m `)
     });
 }
 
 function createAllTable()
 {
-    let allTable = require('./allTable');
+    let allTable = require('./allTable').orderedTables;
     let allData =  require('./allDatas')
     let CrudQuery = require('./tools').CrudBaseQuery
 
@@ -53,7 +60,6 @@ function createAllTable()
     }
     for(let table of allTable)
     {
-
         let query = table.buildCreateTableRequest();
         connection.query(query,(err,result)=>
         {
@@ -64,7 +70,6 @@ function createAllTable()
                 throw err;
             }
             //console.log('\x1b[36m%s\x1b[0m', 'I am cyan');
-            connection.dto[t.name] = new DTO(t,connection)
             console.log(`table\t\x1b[36m${table.name}\x1b[0m  created`)
         })
         //initialisaton
@@ -107,5 +112,7 @@ module.exports.recreateDatabase = function(databaseName)
     clearDatabase(databaseName)
     createAllTable()
 }
+
+setDatabase(databaseName)
 
 module.exports.isCreated = isCreated

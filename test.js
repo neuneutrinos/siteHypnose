@@ -2,8 +2,6 @@
 Faire les tests
 */
 
-tools = require('./tools/array/tools')
+src = require('./Constante/Path')
 
-let tab = {x:'aa',y:'ab',z:'ac','?':'da'}
-
-console.log('TOOLS =>',tools.formatObjectToParameterString(tab) )
+console.log('test => ',src)

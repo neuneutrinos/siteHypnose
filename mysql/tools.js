@@ -1,7 +1,8 @@
 let uuid =require('uuid');
 const connection = require('./mysqlConnection');
 
-let arrayTools = require('../tools/array/tools')
+let arrayTools = require('../tools/array/tools');
+const { query } = require('./mysqlConnection');
 /* 
 Création de table et génération de requète SQL
 Ne gère pas les dépendances, juste le stockages des propriétés et la génération de code sql
@@ -127,7 +128,7 @@ class CrudBaseQuery //create, read, update , delete
     readAllQuery(where=null)
     {
         let query = `select * from ${this.tableData.name}`;
-        if(predicate)query+=` where ${where}`
+        if(where)query+=` where ${where}`
         return query;
     }
 
@@ -150,6 +151,14 @@ class CrudBaseQuery //create, read, update , delete
         let lstKey = [...Object.keys(this.tableData.fields),...Object.keys(this.tableData.foreignkeys)]
         let query = `replace into ${this.tableData.name} (${arrayTools.formatArrayToParameterString(lstKey)}) values (${arrayTools.formatArrayToParameterString(lstValue)})`
         return query
+    }   
+    /*DELETE FROM `utilisateur`
+      WHERE `id` = 1
+    */
+    deleteQuery()
+    {
+        query = `DELETE FROM ${this.tableData.name} WHERE id = ?`
+        return query;
     }
 
 }

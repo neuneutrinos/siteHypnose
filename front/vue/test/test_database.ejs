@@ -1,0 +1,36 @@
+<%# test la lecture d'une base de donnée et de l'injection server dans le fichier %>
+<html>
+    <%- include('../../components/head'); %>
+    
+    <body>
+        <h1>test database : <span cass="alert alert-info"> <%=table.name%></span></h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <% for(let col in table.fields) {%>
+                        <th scope="col"><%=col%> : <%= table.fields[col].type %> </th>
+                    <%}%>
+                    <% for(let col in table.foreignkeys){%>
+                        <th scope="col"><%=col%>  : <%= table.fields.id.type %> </th>
+                    <%}%>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let data in datas){%>
+                    <tr>
+                        <%for(let field in datas[data]){%>
+                            <td>
+
+                                <%=datas[data][field]!=null?datas[data][field]:'NULL'%>
+                            </td>
+                        <%}%>
+                    </tr>
+                <%}%>
+            </tbody>
+        </table>
+        <script>
+            //génération guid V4
+            
+        </script>
+    </body>
+</html>

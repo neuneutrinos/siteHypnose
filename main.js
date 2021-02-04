@@ -1,34 +1,46 @@
-let express = require('express');
 require('./test')
 let createDatabase = require('./mysql/createDatabase');
 var path = require('path');
+const { CrudBaseQuery } = require('./mysql/tools');
+const tables = require('./mysql/allTable');
+const connection = require('./mysql/mysqlConnection');
 
 //fonction qui remet à 0 la base de donnée, à commenter si besoin pour éviter de recréer à chaque sauvegarde
 //createDatabase.recreateDatabase('hypnose')
 
-let app = express();
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, '/front/vue'));
+let app = require('./application/app')
+
+require('./Route/Ressource/cssRoute')
+require('./Route/Ressource/imageRoute')
+require('./Route/Ressource/jsRoute')
 
 
-app.get('/reset',(req,res)=>
+
+
+
+
+app.all('/test/table/:action/:tableName/:id?',(req,res)=>
 {
-    createDatabase.recreateDatabase('hypnose')
-    res.send('reset')
-    res.end()
+  let model = {}
+  let table = tables.allTables[req.params.tableName];
+  let crud = new CrudBaseQuery(table)
+  model.table = tables.allTables[req.params.tableName];
+
+  connection.query(crud.readAllQuery(),(err,resultat)=>
+  {
+    if(err)
+    {
+      model.error = error
+    }
+    else
+    {
+      model.datas=resultat
+    }
+      console.log('model.data =',model.datas)
+      res.render('test/test_database.ejs',model)
+  })
 })
 
 
-app.get('/',(req,res)=>
-{
-  res.render('index', {titre : 'BAHD'});
-})
 
-
-app.get('/test/:controller/:view/:id',(req,res)=>
-{
-    str = '<p>controller ='+req.params.controller+'</p><p>view ='+req.params.view+'</p><p>id ='+req.params.id+'</p>';
-    res.send(str);
-    res.end();
-})
 app.listen(8080)
