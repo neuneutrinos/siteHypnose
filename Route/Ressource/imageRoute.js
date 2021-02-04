@@ -4,14 +4,15 @@ const fs = require('fs')
 
 var app = require('../../application/app')
 
-console.log('routage ressource css');
 
-app.get('/image/:file.:ext',(req,res)=>
+app.get('/image/:dir?/:file.:ext',(req,res)=>
 {
     ext = ['jpeg','jpg','png']
-    res.contentType('jpeg')
+    
+    if(req.params.dir)req.params.file = path.join(req.params.dir,req.params.file);
+
     file = path.join(ConstantePath.RESSOURCE_PATH_IMG,req.params.file+'.'+req.params.ext);
-    if(fs.existsSync(file))
+    if(ext.includes(req.params.ext) && fs.existsSync(file))
         res.sendFile(file);
     else
     {
