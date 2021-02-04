@@ -37,21 +37,29 @@ app.all('/signin',
     var pseudo = req.body.username;
     var password = req.body.password;
     res.end()
+    console.log(pseudo);
     var sql="SELECT * FROM utilisateur WHERE pseudo= ? and password = ?";
-    connection.query (sql, [pseudo, password],(err, res)=>
+    connection.query(sql, [pseudo, password],(err, res)=>
       {
-        if (err) throw err
-         console.log(res);
+          if (err) throw err
+          console.log (res);
+         if (res.length > 0) {
+           console.log("Utilisateur existe déjà ")
+         }
+         else {
+           console.log("Utilisateur non trouvé")
+
+         }
       }
   )
-    let compare = (pseudo, username) => {
+    /*let compare = (pseudo, username) => {
       if (pseudo === body.username ) {
         console.log("L'username entré et l'username en bdd sont identiques")
       } else {
         console.log("L'username entré et l'username en bdd ne correspondent pas")
 
       }
-    }
+    }*/
 
 });
 
